@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Polling;
@@ -60,7 +59,8 @@ public class UpdateHandler(ITelegramBotClient bot, ILogger<UpdateHandler> logger
             "/throw" => FailingHandler(msg),
             _ => Usage(msg)
         });
-        logger.LogInformation("The message was sent with id: {SentMessageId}", sentMessage.Id);
+        
+        logger.LogInformation("The message was sent with id: {SentMessageId} {ChatId}", sentMessage.Id, msg.Chat.Id);
     }
 
     async Task<Message> Usage(Message msg)

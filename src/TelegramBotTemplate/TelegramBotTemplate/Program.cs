@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using Telegram.Bot; 
 using TelegramBotTemplate;
+using TelegramBotTemplate.BackgroundServices;
 using TelegramBotTemplate.Services;
 
 
@@ -32,6 +33,7 @@ builder.Services.AddHttpClient("telegram_bot_client").RemoveAllLoggers()
 builder.Services.AddScoped<UpdateHandler>();
 builder.Services.AddScoped<ReceiverService>();
 builder.Services.AddHostedService<PollingBackgroundService>();
+builder.Services.AddHostedService<PeriodicalCheckService>();
  
 var app = builder.Build();
 app.Run();

@@ -1,10 +1,6 @@
- 
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging; 
+using TelegramBotTemplate.Services;
 
-namespace TelegramBotTemplate.Services;
-
+namespace TelegramBotTemplate.BackgroundServices;
 
 /// <summary>An abstract class to compose Polling background service and Receiver implementation classes</summary>
 /// <remarks>See more: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services#consuming-a-scoped-service-in-a-background-task</remarks>
@@ -24,6 +20,7 @@ public class PollingBackgroundService(IServiceProvider serviceProvider, ILogger<
         {
             try
             {
+                logger.LogInformation("Start receiving updates");
                 // Create new IServiceScope on each iteration. This way we can leverage benefits
                 // of Scoped TReceiverService and typed HttpClient - we'll grab "fresh" instance each time
                 using var scope = serviceProvider.CreateScope();
